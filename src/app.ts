@@ -6,7 +6,10 @@ import cookieParser from 'cookie-parser'
 import { inject, injectable } from 'inversify';
 import { TYPES } from '@src/di/types';
 
-import { AppError } from './utils/errorHandler';
+import { AppError } from './utils/appError';
+import { ServerConfig } from '@src/configs/env.config';
+import 'configs/logger.config';
+
 @injectable()
 export class App{
     private isInitialized: boolean = false;
@@ -28,11 +31,23 @@ export class App{
         if(!this.isInitialized){
             throw new AppError("Application Start", "Error trying to start the app")
         }
-        this.server.listen()
+
+        logger.log('----------------------------------------');
+        logger.log('Starting Server');
+        logger.log('----------------------------------------');
+        this.server.listen(ServerConfig.port, () => {
+        logger.log('----------------------------------------');
+        logger.log(`Server started on ${ServerConfig.host}:${ServerConfig.port}`);
+        logger.log('----------------------------------------');
+        });
     }
 
 
     private setExpressSettings() {
+        logger.log('----------------------------------------');
+        logger.log('Initializing API');
+        logger.log('----------------------------------------');
+
         this.express.use(helmet());
         this.express.use(cookieParser());
         this.express.use(express.urlencoded({extended:true}));
