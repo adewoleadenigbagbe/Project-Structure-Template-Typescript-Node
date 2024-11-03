@@ -10,6 +10,8 @@ import { AppError } from './utils/appError';
 import { ServerConfig } from '@src/configs/env.config';
 import 'configs/logger.config';
 
+import sequelize from '@src/configs/sequelize.config'
+
 @injectable()
 export class App{
     private isInitialized: boolean = false;
@@ -41,6 +43,12 @@ export class App{
         logger.log('----------------------------------------');
         });
     }
+
+    public async shutdown(callback: (err?: Error) => void) {
+        //await this.redisService.close();
+        await sequelize.close();
+        this.server?.close(callback);
+      }
 
 
     private setExpressSettings() {
