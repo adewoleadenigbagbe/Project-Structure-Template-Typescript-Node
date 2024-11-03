@@ -9,10 +9,10 @@ export const TYPES = {
     // Respositories
     // UserRepository: Symbol.for('UserRepository'),
   
-    // Services
-    // AuthService: Symbol.for('AuthService'),
-    // UserService: Symbol.for('UserService'),
+    //Services
+    UserService: Symbol.for('UserService'),
     // RedisService: Symbol.for('RedisService'),
+    // AuthService: Symbol.for('AuthService'),
     // SocketService: Symbol.for('SocketService'),
   
     // Controllers

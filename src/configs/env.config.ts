@@ -1,4 +1,7 @@
 import { Options } from 'sequelize';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 export const IsTest = process.env.NODE_ENV === 'test';
 export const IsDev = process.env.NODE_ENV === 'development';
