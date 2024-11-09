@@ -21,7 +21,7 @@ export class QuestionController{
     public async CreateQuestion(req:Request<[],ICreateQuestionRequest>, res:Response){
         const result = await this.service.create(req.body);
         if (result.statusCode === StatusCodes.CREATED){
-            return res.status(StatusCodes.NO_CONTENT).json({id:result.id});
+            return res.status(StatusCodes.CREATED).json({id:result.id});
         }
 
         return res.status(result.statusCode).json(result.errors);

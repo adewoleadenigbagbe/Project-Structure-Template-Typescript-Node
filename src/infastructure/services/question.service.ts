@@ -6,6 +6,7 @@ import {ICreateQuestionRequest,
     IVoteQuestionResponse} 
 from '@src/infastructure/dtos/question.model'
 import { Question } from '../database/models/question'
+import { tagBuilder } from '@src/utils/formattags'
 
 
 export interface IQuestionService{
@@ -18,9 +19,10 @@ export interface IQuestionService{
 export class QuestionService implements IQuestionService{
     public async create(request:ICreateQuestionRequest): Promise<ICreateQuestionResponse> {
         const {title,tags,text,userId} = request;
+        const tt = tagBuilder(tags!)
         const question = await Question.create({
             title: title,
-            tags: tags,
+            tags: tt,
             text: text,
             userId: userId
         });
