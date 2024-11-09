@@ -1,5 +1,7 @@
 import { interfaces, Container as InversifyContainer} from "inversify";
 
+import {ControllersModule,ServerModule,ServicesModule} from '@src/di/modules'
+
 import { App } from "@src/app";
 
 
@@ -39,10 +41,12 @@ class ContainerManager{
 
     private initialize() {
         if(this.initialized){
-            return
+            return;
         }
 
-        //this._container.load(ControllersModule);
+        this._container.load(ServerModule);
+        this._container.load(ServicesModule)
+        this._container.load(ControllersModule);
         this._container.bind<App>(App).toSelf();
         this.initialized = true;
     }

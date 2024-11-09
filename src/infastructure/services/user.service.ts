@@ -1,6 +1,6 @@
 import { injectable } from 'inversify'
-
 import {StatusCodes} from 'http-status-codes'
+
 import { IGetUserResponse } from '../dtos/user.model'
 import {User} from '@src/infastructure/database/models/user'
 

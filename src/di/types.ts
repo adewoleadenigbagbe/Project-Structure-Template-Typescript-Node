@@ -11,13 +11,15 @@ export const TYPES = {
   
     //Services
     UserService: Symbol.for('UserService'),
+    QuestionService: Symbol.for('QuestionService'),
     // RedisService: Symbol.for('RedisService'),
     // AuthService: Symbol.for('AuthService'),
     // SocketService: Symbol.for('SocketService'),
   
     // Controllers
     // AuthController: Symbol.for('AuthController'),
-    // UserController: Symbol.for('UserController'),
+    UserController: Symbol.for('UserController'),
+    QuestionController: Symbol.for('QuestionController')
   
     // // Middleware
     // AuthHandler: Symbol.for('AuthHandler'),
