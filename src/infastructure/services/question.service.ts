@@ -14,6 +14,7 @@ export interface IQuestionService{
     downVoteQuestion(id:string):Promise<IVoteQuestionResponse>
 }
 
+@injectable()
 export class QuestionService implements IQuestionService{
     public async create(request:ICreateQuestionRequest): Promise<ICreateQuestionResponse> {
         const {title,tags,text,userId} = request;

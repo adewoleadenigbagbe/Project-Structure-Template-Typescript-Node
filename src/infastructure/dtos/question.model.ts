@@ -5,7 +5,6 @@ export interface ICreateQuestionRequest{
     userId : string
 }
 
-
 export interface ICreateQuestionResponse{
     statusCode : number
     errors? : string[] | null,
