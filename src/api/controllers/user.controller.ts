@@ -4,7 +4,7 @@ import { inject, injectable } from "inversify";
 import { TYPES } from "@src/di/types";
 import { IUserService } from "@src/infastructure/services/user.service";
 
-import { Controller,Route } from "../decorators/index";
+import { Controller,Route,AuthourizeGuard } from "../decorators/index";
 import { StatusCodes } from 'http-status-codes';
 @Controller('/users')
 @injectable()
@@ -14,7 +14,7 @@ export class UserController{
     ){}
 
     @Route('get','/email')
-    //@AuthGuard()
+    @AuthourizeGuard()
     //@Validator({ query: UserQuerySchema })
     public async GetUserEmail(req:Request<string>, res:Response){
         const result = await this.service.getUserbyEmail(req.params);
@@ -25,6 +25,7 @@ export class UserController{
     }
 
     @Route('get','/id')
+    @AuthourizeGuard()
     public async GetUserId(req:Request<string>, res:Response){
         const result = await this.service.getUserbyId(req.params)
         if (result.statusCode === StatusCodes.OK){

@@ -4,7 +4,7 @@ import { inject, injectable } from "inversify";
 import { TYPES } from "@src/di/types";
 import { IQuestionService } from "@src/infastructure/services/question.service";
 
-import { Controller,Route } from "../decorators/index";
+import { Controller,Route, AuthourizeGuard } from "../decorators/index";
 import { StatusCodes } from 'http-status-codes';
 import { ICreateQuestionRequest } from '@src/infastructure/dtos/question.model';
 
@@ -16,7 +16,7 @@ export class QuestionController{
     ){}
 
     @Route('post')
-    //@AuthGuard()
+    @AuthourizeGuard()
     //@Validator({ query: UserQuerySchema })
     public async CreateQuestion(req:Request<[],ICreateQuestionRequest>, res:Response){
         const result = await this.service.create(req.body);
@@ -28,6 +28,7 @@ export class QuestionController{
     }
 
     @Route('put','/id')
+    @AuthourizeGuard()
     public async UpVoteQuestion(req:Request<string>, res:Response){
         const result = await this.service.upVoteQuestion(req.params)
         if (result.statusCode === StatusCodes.NO_CONTENT){
@@ -38,6 +39,7 @@ export class QuestionController{
     }
 
     @Route('put','/id')
+    @AuthourizeGuard()
     public async DownVoteQuestion(req:Request<string>, res:Response){
         const result = await this.service.downVoteQuestion(req.params)
         if (result.statusCode === StatusCodes.NO_CONTENT){

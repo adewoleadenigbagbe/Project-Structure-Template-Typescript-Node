@@ -4,7 +4,7 @@ import { inject, injectable } from "inversify";
 
 import { TYPES } from "@src/di/types";
 
-import { Controller,Route } from "../decorators/index";
+import { Controller,Route, AuthourizeGuard } from "../decorators/index";
 import { StatusCodes } from 'http-status-codes';
 import { ISubscriptionService } from '@src/infastructure/services';
 import { ICreateSubscriptionRequest, IGetSubscriptionQuestionRequest } from '@src/infastructure/dtos/subscription.model';
@@ -18,7 +18,7 @@ export class SubscriptionController{
     ){}
 
     @Route('post')
-    //@AuthGuard()
+    @AuthourizeGuard()
     //@Validator({ query: UserQuerySchema })
     public async CreateSubscription(req:Request<[],ICreateSubscriptionRequest>, res:Response){
         const result = await this.service.createSubscription(req.body);
@@ -30,6 +30,7 @@ export class SubscriptionController{
     }
 
     @Route('get')
+    @AuthourizeGuard()
     public async GetSubscription(req:Request<IGetSubscriptionQuestionRequest>, res:Response){
         const result = await this.service.getSubscriptionbyQuestionId(req.params);
         if (result.statusCode === StatusCodes.OK){

@@ -3,7 +3,7 @@ import { inject, injectable } from "inversify";
 
 import { TYPES } from "@src/di/types";
 
-import { Controller,Route } from "../decorators/index";
+import { Controller,Route, AuthourizeGuard } from "../decorators/index";
 import { StatusCodes } from 'http-status-codes';
 import { ICreateAnswerRequest } from '@src/infastructure/dtos/answer.model';
 import { IAnswerService } from '@src/infastructure/services';
@@ -16,7 +16,7 @@ export class AnswerController{
     ){}
 
     @Route('post')
-    //@AuthGuard()
+    @AuthourizeGuard()
     //@Validator({ query: UserQuerySchema })
     public async CreateAnswer(req:Request<[],ICreateAnswerRequest>, res:Response){
         const result = await this.service.create(req.body);

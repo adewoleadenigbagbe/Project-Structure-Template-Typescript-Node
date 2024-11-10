@@ -18,8 +18,8 @@ export const TYPES = {
     AnswerController: Symbol.for('AnswerController'),
     SubscriptionController: Symbol.for('SubscriptionController'),
 
-    // // Middleware
-    // AuthHandler: Symbol.for('AuthHandler'),
+    // Middleware
+    AuthHandler: Symbol.for('AuthHandler'),
     // SessionHandler: Symbol.for('SessionHandler'),
     // RateLimitHandler: Symbol.for('RateLimitHandler'),
   };

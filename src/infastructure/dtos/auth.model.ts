@@ -17,6 +17,5 @@ export interface ILoginUserRequest{
 export interface ILoginUserResponse{
     statusCode: number
     errors?: string[]
-    token?: string
-    
+    accesstoken?: string  
 }

@@ -2,12 +2,14 @@ import { GenerateJwt } from "@src/utils/jwt";
 import { User } from "../database/models";
 import { ICreateUserRequest, ICreateUserResponse, ILoginUserRequest,ILoginUserResponse } from "../dtos/auth.model";
 import { StatusCodes } from "http-status-codes";
+import { injectable } from "inversify";
 
 export interface IAuthService{
     register(request:ICreateUserRequest):Promise<ICreateUserResponse>
     signin(request:ILoginUserRequest):Promise<ILoginUserResponse>
 }
 
+@injectable()
 export class AuthService implements IAuthService{
     public async register(request: ICreateUserRequest):Promise<ICreateUserResponse> {
        const {name,email,password} = request;
@@ -46,7 +48,6 @@ export class AuthService implements IAuthService{
         const id:string = user.getDataValue("Id");
 
         const token = GenerateJwt(id,email);
-        return {statusCode: StatusCodes.OK, token: token}
+        return {statusCode: StatusCodes.OK, accesstoken: token}
     }
-    
 }

@@ -9,7 +9,16 @@ export function GenerateJwt(id:string, email:string):string{
     return token;
 }
 
-export function ValidateJwt(token:string, secret: string):string{
-    const payload = verify(token,secret) as JwtPayload
-    return payload["Id"]
+export function ValidateJwt(token:string, secret: string){
+    let response :{
+        payload: JwtPayload| null
+        error: unknown 
+    }
+    try{
+        const payload = verify(token,secret) as JwtPayload
+        response = {payload, error:null}
+    }catch(err){
+        response = {payload:null,error:err}
+    }
+    return response
 }
