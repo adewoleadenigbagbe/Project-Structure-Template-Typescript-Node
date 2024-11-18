@@ -11,7 +11,7 @@ export function AuthourizeGuard() {
       const originalMethod = descriptor.value;
       descriptor.value = async function (...args: RouteHandler) {
         if (!container) {
-          throw new AppError('Container not set', StatusCodes.INTERNAL_SERVER_ERROR.toString());
+          throw new AppError('Container not set', StatusCodes.INTERNAL_SERVER_ERROR);
         }
         const authHandler = container.get<AuthHandler>(TYPES.AuthHandler);
         const handlerMiddleware = await authHandler.handler();

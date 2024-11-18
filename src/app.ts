@@ -45,7 +45,7 @@ export class App{
 
     public Start(){
         if(!this.isInitialized){
-            throw new AppError("Application Start", "Error trying to start the app")
+            throw new AppError("Error trying to start the app", StatusCodes.INTERNAL_SERVER_ERROR)
         }
 
         logger.log('----------------------------------------');
@@ -90,7 +90,7 @@ export class App{
           catchAsync(async (req) => {
             throw new AppError(
               `Can't find ${req.originalUrl} on this server`,
-              StatusCodes.NOT_FOUND.toString(),
+              StatusCodes.NOT_FOUND,
             );
           }),
         );

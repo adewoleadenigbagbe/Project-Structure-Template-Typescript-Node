@@ -16,17 +16,17 @@ export class AuthHandler{
     ){}
     private async AuthorizeUser(req:Request,_:Response){
         if(!req.headers.authorization?.startsWith('Bearer')){
-            throw new AppError("Auth Headers missing. please provide an access token",StatusCodes.UNAUTHORIZED.toString());
+            throw new AppError("Auth Headers missing. please provide an access token",StatusCodes.UNAUTHORIZED);
         }
 
         const accessToken = req.headers.authorization?.split(' ')[1];
         if (!accessToken){
-            throw new AppError("unauthorized to access this resource.please provide an access token",StatusCodes.UNAUTHORIZED.toString());
+            throw new AppError("unauthorized to access this resource.please provide an access token",StatusCodes.UNAUTHORIZED);
         }
 
         const result = ValidateJwt(accessToken, JwtConfig.secretKey)
         if(result.error){
-            throw new AppError(String(error),StatusCodes.UNAUTHORIZED.toString());
+            throw new AppError(String(error),StatusCodes.UNAUTHORIZED);
         }
         
         //check if the token has been blacklisted
@@ -35,7 +35,7 @@ export class AuthHandler{
 
         const blacklistedToken = await client.get(userId)
         if(blacklistedToken === accessToken){
-            throw new AppError("Token already expired.. Login again",StatusCodes.UNAUTHORIZED.toString());
+            throw new AppError("Token already expired.. Login again",StatusCodes.UNAUTHORIZED);
         }
 
         return

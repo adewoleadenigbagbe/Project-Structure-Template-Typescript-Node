@@ -21,10 +21,9 @@ export const DbConfig: Options = {
     database: process.env.DB_NAME!,
     username: process.env.DB_USERNAME!,
     password: process.env.DB_PASSWORD!
-  };
+};
 
-
-  export const RedisConfig: RedisOptions = {
+export const RedisConfig: RedisOptions = {
     host: process.env.REDIS_HOST!,
     port: +process.env.REDIS_PORT!,
     username: process.env.REDIS_USER!,
@@ -38,7 +37,7 @@ export const DbConfig: Options = {
       },
     }),
     db: 0,
-  };
+};
 
   export const JwtConfig = {
     secretKey: process.env.JWT_SECRET_KEY!,

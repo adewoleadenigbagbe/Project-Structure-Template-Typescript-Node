@@ -69,13 +69,13 @@ export function Validator({ body, query, params }: SchemaPayload) {
           const errorMessages = error.errors.map(errorMessageBuilder);
           throw new AppError(
             'Invalid payload',
-            StatusCodes.BAD_REQUEST.toString(),
-           // errorMessages,
+            StatusCodes.BAD_REQUEST,
+           errorMessages,
           );
         } else {
           throw new AppError(
             'Internal Server Error',
-            StatusCodes.INTERNAL_SERVER_ERROR.toString(),
+            StatusCodes.INTERNAL_SERVER_ERROR,
           );
         }
       }
